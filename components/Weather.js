@@ -1,21 +1,29 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import FontAwesome, { Icons } from 'react-native-fontawesome';
-import Svg, {Use, Image } from 'react-native-svg'
+import PropTypes from 'prop-types'
+import {weatherConditions} from '../utils/WeatherConditions'
 
 const Weather = ({weather, temperature}) => {
     return (
-        <View style={styles.weatherContainer}>
-            <View style={styles.headerContainer}>
-                <FontAwesome style={{fontSize: 48, color: '#fff'}}>{Icons.sun}</FontAwesome>
-                <Text style={styles.tempText}>{Math.round(temperature)}˚F</Text> 
+        weather ? 
+            <View style={[styles.weatherContainer, {backgroundColor: weatherConditions[weather].color}]}>
+                <View style={styles.headerContainer}>
+                    <FontAwesome style={{fontSize: 48, color: '#fff'}}>{Icons[weatherConditions[weather].icon]}</FontAwesome>
+                    <Text style={styles.tempText}>{Math.round(temperature)}˚F</Text> 
+                </View>
+                <View style={styles.bodyContainer}>
+                    <Text style={styles.title}>{weatherConditions[weather].title}</Text>
+                    <Text style={styles.subtitle}>{weatherConditions[weather].subtitle}</Text>
+                </View>
             </View>
-            <View style={styles.bodyContainer}>
-                <Text style={styles.title}>{weather}</Text>
-                <Text style={styles.subtitle}>It hurts my eyes!</Text>
-            </View>
-        </View>
+        : null
     )
+}
+
+Weather.propTypes = {
+    temperature: PropTypes.number.isRequired,
+    weather: PropTypes.string
 }
 
 const styles = StyleSheet.create({
