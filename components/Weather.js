@@ -3,15 +3,15 @@ import { View, Text, StyleSheet } from 'react-native'
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 import Svg, {Use, Image } from 'react-native-svg'
 
-const Weather = () => {
+const Weather = ({weather, temperature}) => {
     return (
         <View style={styles.weatherContainer}>
             <View style={styles.headerContainer}>
                 <FontAwesome style={{fontSize: 48, color: '#fff'}}>{Icons.sun}</FontAwesome>
-                <Text style={styles.tempText}>Temperature˚</Text> 
+                <Text style={styles.tempText}>{Math.round(temperature)}˚F</Text> 
             </View>
             <View style={styles.bodyContainer}>
-                <Text style={styles.title}>So Sunny</Text>
+                <Text style={styles.title}>{weather}</Text>
                 <Text style={styles.subtitle}>It hurts my eyes!</Text>
             </View>
         </View>
